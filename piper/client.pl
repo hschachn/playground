@@ -1,11 +1,18 @@
 use Win32::Pipe;
 
-my $pipe = new Win32::Pipe("\\\\.\\pipe\\piper");
-my $text = join (' ' , @ARGV);
 
-$pipe->Write($text);
+while (1) {
 
-my $res = $pipe->Read();
-$pipe->Close();
-print "$res\n";
+    print '> ';
+    my $text = <STDIN>;
+    
+    chomp $text;
+    my $pipe = new Win32::Pipe("\\\\.\\pipe\\piper");
+    die "Cannot connect server!\n" if not $pipe;
+    $pipe->Write($text);
 
+    my $res = $pipe->Read();
+    $pipe->Close();
+    print "> $res\n";
+
+}
