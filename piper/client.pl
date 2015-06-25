@@ -12,6 +12,7 @@ while (1) {
     $pipe->Write($text);
 
     my $res = $pipe->Read();
+    chomp $res;
     $pipe->Close();
     print "> $res\n";
 
