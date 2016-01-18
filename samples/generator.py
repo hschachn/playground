@@ -1,21 +1,21 @@
+"""Generator sample code"""
 
+def get_counter( start ):
 
-def get_counter():
-
-    def create_counter():
-        s = 1
+    def create_counter(ssa):
+        s = ssa
         while True:
             yield s
             s = s + 1 
 
-    _counter = create_counter()
+    _counter = create_counter(start)
 
     def _get_next():
         return next(_counter)
 
     return _get_next
 
-counter = get_counter()
+counter = get_counter( 2 )
 
 print ( counter() )
 print ( counter() )

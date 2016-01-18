@@ -1,0 +1,36 @@
+<html lang="en">
+    <head>
+    	<title>Test</title>
+    	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    	<script type="text/javascript">
+    	$(document).ready(function() {
+    		$('#test').click( function(event) { 
+                alert( "Clicked!");
+                event.stopPropagation();
+                });
+    		$('#header').click(function(event) {
+    		    $('#test').click();
+    		});
+    	});
+    	</script>
+    	<style type="text/css">
+    	#container.hidden #body {
+    		display:none;
+    	}
+        #header {
+            width: 100px;
+            height: 100px;
+background-color: yellow;
+        }
+        .cb-row {margin: 45px;clear:both;overflow:hidden;}
+        .cb-row label {float:left;}
+        .cb-row input {float:right;}
+    	</style>
+    </head>
+    <body>
+        <h1>Title</h1>
+    		<div id="header">
+    			<input class="cb-row" id="test" type="checkbox" name="test" />
+    		</div>
+    </body>
+</html>
