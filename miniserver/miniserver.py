@@ -2,6 +2,7 @@ __author__ = 'Hermann Schachner'
 
 import logging
 import concurrent.futures
+import hexdump
 
 from tornado.ioloop import IOLoop
 from tornado.web import *
