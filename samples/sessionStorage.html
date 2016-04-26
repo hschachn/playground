@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    	<title>Test sessionStorage</title>
+        <meta http-equiv="pragma" content="no-cache" />
+    	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    	<script type="text/javascript">
+
+        function generateUUID() {
+            var d = new Date().getTime();
+            var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = (d + Math.random()*16)%16 | 0;
+                d = Math.floor(d/16);
+                return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+            });
+            return uuid;
+        };
+
+        function supports_html5_storage() {
+          try {
+            return 'sessionStorage' in window && window['sessionStorage'] !== null;
+          } catch (e) {
+            return false;
+          }
+        }
+
+    	$(document).ready(function() {
+    
+            if ( !supports_html5_storage () ) {
+                alert( "No web storage" );
+                return;
+            }
+            var id=window.sessionStorage.getItem("orSessionGuid");
+
+            if (!id)
+                id = generateUUID();
+            window.sessionStorage.setItem("orSessionGuid", id);
+            $("#sessionId").html( id );   
+
+    	});
+    	</script>
+
+    	<style type="text/css">
+    	#container.hidden #body {
+    		display:none;
+    	}
+        #header {
+            width: 100px;
+            height: 100px;
+background-color: yellow;
+        }
+        .cb-row {margin: 45px;clear:both;overflow:hidden;}
+        .cb-row label {float:left;}
+        .cb-row input {float:right;}
+    	</style>
+    </head>
+    <body>
+            <h1>Page 1</h1>
+            <span id="sessionId"></span><br />
+            <a href="./sessionStorage2.html" >Link</a><br />
+            <a href="./sessionStorage2.html" target="_blank">Link "_blank"</a><br />
+    </body>
+</html>
