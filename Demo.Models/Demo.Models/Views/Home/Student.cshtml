@@ -1,0 +1,56 @@
+﻿@model Demo.Models.Models.StudentPersonViewModel
+
+@{
+	ViewBag.Title = "Student";
+}
+
+<h2>Student</h2>
+
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		<h4>StudendModel</h4>
+		<hr />
+		<div class="form-group">
+			<label class="control-label col-md-2" for="FirstName">FirstName</label>
+			<div class="col-md-10">
+				<input class="form-control text-box single-line" id="FirstName" name="Person[FirstName]" type="text" value="" />
+				<span class="field-validation-valid text-danger" data-valmsg-for="FirstName" data-valmsg-replace="true"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2" for="LastName">LastName</label>
+			<div class="col-md-10">
+				<input class="form-control text-box single-line" id="LastName" name="Person[LastName]" type="text" value="" />
+				<span class="field-validation-valid text-danger" data-valmsg-for="LastName" data-valmsg-replace="true"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2" for="StudentId">StudentId</label>
+			<div class="col-md-10">
+				<input class="form-control text-box single-line" data-val="true" data-val-number="The field StudentId must be a number." data-val-required="The StudentId field is required." id="StudentId" name="Person[StudentId]" type="number" value="" />
+				<span class="field-validation-valid text-danger" data-valmsg-for="StudentId" data-valmsg-replace="true"></span>
+			</div>
+		</div>
+
+
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Create" class="btn btn-default" />
+			</div>
+		</div>
+	</div>
+}
+
+<div>
+	@Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}

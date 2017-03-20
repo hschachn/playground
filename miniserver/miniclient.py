@@ -21,7 +21,7 @@ def thread_runner(i,n, lg):
         response = connection.getresponse()
         if response.status == http.client.OK:
             dd = json.loads(response.read().decode())
-            print("FINISHED       F(%d)" % n)  # , dd['result']))
+            print("FINISHED       F(%d) = %s" % (n, dd['result']))
         else:
             print("Error: %s" % response.read())
         connection.close()
