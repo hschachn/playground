@@ -1,7 +1,5 @@
 use File::Find;
 use Getopt::Long;
-use Tie::File;
-
 
 my %OPTIONS = (
     
@@ -51,14 +49,17 @@ my $sumloc = 0;
 finddepth( 
     {
         wanted =>  sub {
-
-            return if $_ =~ /^[.]{0,2}$/;
-            return if $_ !~ $ext_regex;
+            
+            my $file = $_;
+            return if $file =~ /^[.]{0,2}$/;
+            return if $file !~ $ext_regex;
             return if $File::Find::name =~ $exclude_regex;
-            my @lines;
-            tie @lines , 'Tie::File', $_ or return;
-            my $loc = scalar @lines;
-            untie @lines;
+
+            my $loc = 0;
+            open FILE , '<', $file or die "$! : <$file>";
+            $loc++ while ( my $l = <FILE> );
+            close FILE;
+            
             my $ff = { file => $_ , loc => $loc , class => classify ($File::Find::name )};
             push @files , $ff;
             printFile( $ff );
